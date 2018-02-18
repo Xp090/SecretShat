@@ -44,20 +44,6 @@ public class FirebaseDatabaseHelper {
         //
         final DatabaseReference contactsData = ChatUser.DBRefCurrentUser.child(ChatUser.Contacts_KEY);
         contactsData.keepSynced(true);
-        contactsData.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot userID : dataSnapshot.getChildren()) {
-
-                }
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-            }
-        });
-
         contactsData.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {

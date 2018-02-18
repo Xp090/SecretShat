@@ -1,6 +1,5 @@
 package me.xp090.secretshat.Adapters;
 
-import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.text.format.DateFormat;
 import android.view.LayoutInflater;
@@ -28,7 +27,6 @@ public class MessageAdapter extends FirebaseRecyclerAdapter<ChatMessage,MessageA
      *
      * @param options
      */
-    private Context context;
 
     public MessageAdapter(FirebaseRecyclerOptions<ChatMessage> options) {
         super(options);
@@ -40,7 +38,7 @@ public class MessageAdapter extends FirebaseRecyclerAdapter<ChatMessage,MessageA
     protected void onBindViewHolder(MessagesViewHolder holder, int position, ChatMessage model) {
         holder.messageUser.setText(model.getMessageUser()) ;
         holder.messageText.setText(model.getMessageText());
-        holder.messageTime.setText(DateFormat.format("dd-MM-yyyy (HH:mm:ss)", model.getMessageTime()));
+        holder.messageTime.setText(DateFormat.format("hh:mm a", model.getMessageTime()));
 
     }
 
@@ -56,19 +54,6 @@ public class MessageAdapter extends FirebaseRecyclerAdapter<ChatMessage,MessageA
         return new MessagesViewHolder(view);
     }
 
-    class MessagesViewHolder extends RecyclerView.ViewHolder {
-         TextView messageText;
-         TextView messageUser;
-         TextView messageTime;
-
-        public MessagesViewHolder(View itemView) {
-            super(itemView);
-            messageText = itemView.findViewById(R.id.message_text);
-            messageUser = itemView.findViewById(R.id.message_user);
-            messageTime =  itemView.findViewById(R.id.message_time);
-        }
-    }
-
     @Override
     public int getItemViewType(int position) {
       ChatMessage message = getItem(position);
@@ -81,6 +66,22 @@ public class MessageAdapter extends FirebaseRecyclerAdapter<ChatMessage,MessageA
            // otherwise we use the left side bubble for messages from the other contact
            return 1;
        }
+    }
+
+    class MessagesViewHolder extends RecyclerView.ViewHolder {
+        TextView messageText;
+        TextView messageUser;
+        TextView messageTime;
+        View placeHolderMargin;
+
+        public MessagesViewHolder(View itemView) {
+            super(itemView);
+            messageText = itemView.findViewById(R.id.message_text);
+            messageUser = itemView.findViewById(R.id.message_user);
+            messageTime = itemView.findViewById(R.id.message_time);
+            placeHolderMargin = itemView.findViewById(R.id.placeholdermargin);
+            placeHolderMargin.getLayoutParams().width = itemView.getResources().getDisplayMetrics().widthPixels / 6;
+        }
     }
 
 }

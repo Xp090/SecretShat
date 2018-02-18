@@ -4,7 +4,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -32,7 +31,7 @@ public class ChatUser {
     private String UserNickName;
     private String UserEmail;
     private String UserFcmToken;
-    private boolean UserOnlineStatus;
+    private boolean UserOnlineStatus = false;
     private Map<String,String> UserContacts;
 
     public ChatUser() {

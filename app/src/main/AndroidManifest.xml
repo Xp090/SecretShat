@@ -13,34 +13,42 @@
         tools:replace="android:supportsRtl">
         <activity
             android:name=".ChatActivity"
-            android:theme="@style/AppTheme.NoActionBar"
+            android:launchMode="singleTask"
             android:parentActivityName=".ContactsActivity"
-           >
+            android:theme="@style/AppTheme.NoActionBar">
+
+        </activity>
+        <activity
+            android:name=".WelcomeActivity"
+            android:launchMode="singleTask"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
             <intent-filter>
                 <action android:name="OpenContact" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".WelcomeActivity">
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
-    </activity>
         <activity
             android:name=".ContactsActivity"
             android:label="@string/title_activity_contacts"
-            android:theme="@style/AppTheme.NoActionBar"
-            >
+            android:launchMode="singleTask"
+            android:theme="@style/AppTheme.NoActionBar" />
 
-        </activity>
-
-        <service android:name=".fcm.SecretShatFirebaseInstanceIdService">
+        <service android:name=".firebase.SecretShatFirebaseInstanceIdService">
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
+
+        <activity android:name=".SettingsActivity" />
+        <activity
+            android:name=".SecurityActivity"
+            android:theme="@style/SecTheme"></activity>
     </application>
 
 </manifest>

@@ -1,45 +1,57 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginLeft="8dp"
-    android:layout_marginTop="8dp">
+    android:layout_marginTop="8dp"
+    android:orientation="horizontal">
 
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:background="@drawable/bubble_in"
-        android:layoutDirection="ltr">
+        android:layout_weight="1"
+        android:background="@drawable/ic_chat_bubble_in"
+        android:orientation="vertical"
+        android:padding="8dp">
 
         <TextView
             android:id="@+id/message_user"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:text="fdsfsdf"
-            android:textStyle="normal|bold" />
+            android:textStyle="normal|bold"
+            android:visibility="gone"
+            tools:text="fdsfsdf" />
 
         <TextView
             android:id="@+id/message_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_below="@+id/message_user"
-            android:layout_marginTop="5dp"
-            android:text="dsfsdfds"
+            android:layout_gravity="center"
+            android:layout_marginBottom="8dp"
+            android:layout_weight="1"
+            android:padding="4dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:textColor="@android:color/white"
-            android:textSize="18sp" />
+            android:textColor="@android:color/black"
+            android:textSize="18sp"
+            tools:text="fd" />
 
-        <TextView
-            android:id="@+id/message_time"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_below="@id/message_text"
-            android:layout_marginTop="5dp"
-            android:text="sdfsdfsd" />
-    </RelativeLayout>
-</RelativeLayout>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/message_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top"
+        android:layout_marginLeft="2dp"
+        android:layout_weight="0"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        tools:text="dsfsdfsd" />
+
+    <Space
+        android:id="@+id/placeholdermargin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+</LinearLayout>

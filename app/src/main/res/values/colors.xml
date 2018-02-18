@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
+    <!--<color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="sad">#FFFFFF</color>-->
+    <color name="colorPrimary">#d73d31</color>
+    <color name="colorPrimaryDark">#ca2c2c</color>
+    <color name="primary_light">#ed5463</color>
+    <color name="colorAccent">#009688</color>
+    <color name="secAccentDark">#006158</color>
+    <color name="primary_text">#212121</color>
+    <color name="secondary_text">#757575</color>
+    <color name="icons">#FFFFFF</color>
+    <color name="divider">#BDBDBD</color>
+
 </resources>

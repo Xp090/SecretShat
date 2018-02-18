@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory
+        android:persistent="false"
+        android:title="Security" />
+    <ListPreference
+        android:defaultValue="none"
+        android:entries="@array/security_type_labels"
+        android:entryValues="@array/security_type_values"
+        android:key="sec_method"
+        android:persistent="false"
+        android:title="Select Security Method" />
+
+    <ListPreference
+        android:defaultValue="3"
+        android:enabled="false"
+        android:entries="@array/security_pattern_size_labels"
+        android:entryValues="@array/security_pattern_size_values"
+        android:key="sec_pattern_size"
+        android:persistent="false"
+        android:title="Pattern Grid Size" />
+    <ListPreference
+        android:defaultValue="4"
+        android:enabled="false"
+        android:entries="@array/security_pin_length_labels"
+        android:entryValues="@array/security_pin_length_values"
+        android:key="sec_pin_length"
+        android:persistent="false"
+        android:title="Pin Length" />
+    <Preference
+        android:enabled="true"
+        android:key="sec_setup"
+        android:persistent="false"
+        android:title="Setup Security Method..."></Preference>
+</PreferenceScreen>

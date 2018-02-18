@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="security_type_labels">
+        <item>None</item>
+        <item>Pattern</item>
+        <item>Pin</item>
+    </string-array>
+    <string-array name="security_type_values">
+        <item>none</item>
+        <item>pattern</item>
+        <item>pin</item>
+    </string-array>
+
+    <string-array name="security_pattern_size_values">
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+    </string-array>
+    <string-array name="security_pattern_size_labels">
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+    </string-array>
+
+    <string-array name="security_pin_length_values">
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+    </string-array>
+
+    <string-array name="security_pin_length_labels">
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+    </string-array>
+
+</resources>

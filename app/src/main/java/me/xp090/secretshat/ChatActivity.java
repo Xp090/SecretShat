@@ -1,14 +1,15 @@
 package me.xp090.secretshat;
 
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.widget.EditText;
-import android.widget.RadioButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.firebase.ui.database.FirebaseRecyclerOptions;
@@ -22,30 +23,30 @@ import butterknife.OnClick;
 import me.xp090.secretshat.Adapters.MessageAdapter;
 import me.xp090.secretshat.DataModels.ChatMessage;
 import me.xp090.secretshat.DataModels.ChatUser;
-import me.xp090.secretshat.Util.FirebaseDatabaseUtil;
+import me.xp090.secretshat.firebase.FirebaseDatabaseHelper;
 
-public class ChatActivity extends AppCompatActivity {
+public class ChatActivity extends AppCompatActivity implements FirebaseDatabaseHelper.ContactsInfoUpdateListner {
 
     public static final String CHAT_ID_EXTRA = "ChatID";
     private static final int SIGN_IN_REQUEST_CODE = 404;
-    private String chatID;
-    private String contactUID;
     MessageAdapter adapter;
     @BindView(R.id.messages_list) RecyclerView mMessagesList;
     @BindView(R.id.fab) FloatingActionButton mSendButton;
     @BindView(R.id.input) EditText mMessageText;
-    @BindView(R.id.toolbar_online_status)
-    RadioButton mOnlineIndicator;
+    @BindView(R.id.img_status)
+    ImageView mOnlineIndicator;
     @BindView(R.id.toolbar_UserName)
     TextView mContactUserName;
+    private String chatID;
+    private String contactUID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
         ButterKnife.bind(this);
-        FirebaseDatabaseUtil.chatActivity = this;
 
+        FirebaseDatabaseHelper.addContactsInfoListner(this);
         Toolbar toolbar = findViewById(R.id.toolbar3);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
@@ -54,16 +55,28 @@ public class ChatActivity extends AppCompatActivity {
         actionBar.setDisplayShowCustomEnabled(true);
         actionBar.setDisplayShowTitleEnabled(false);
 
-        //get the contact id form intent (from notification or from contacts list)
+        //getElementByIndex the contact id form intent (from notification or from contacts list)
         contactUID = getIntent().getStringExtra(CHAT_ID_EXTRA);
         //generate the chatid (conversiation id) to query the messages bettwen both users
-        chatID = FirebaseDatabaseUtil.generateChatID(contactUID);
+        chatID = FirebaseDatabaseHelper.generateChatID(contactUID);
         if (chatID != null) {
             showMessages();
             //set then name and online status in toolbar
-            updateChatHeader(contactUID);
+            updateChatHeader();
         }
 
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        contactUID = intent.getStringExtra(CHAT_ID_EXTRA);
+        chatID = FirebaseDatabaseHelper.generateChatID(contactUID);
+        if (chatID != null) {
+            showMessages();
+            //set then name and online status in toolbar
+            updateChatHeader();
+        }
     }
 
     private void showMessages() {
@@ -99,12 +112,10 @@ public class ChatActivity extends AppCompatActivity {
 
     }
 
-    public void updateChatHeader(String contactUID) {
-        if (this.contactUID.equals(contactUID) ) {
-            ChatUser contactUser = FirebaseDatabaseUtil.ContactsDataMap.get(contactUID);
+    public void updateChatHeader() {
+        ChatUser contactUser = FirebaseDatabaseHelper.ContactsDataMap.getElementByKey(contactUID);
             mContactUserName.setText(contactUser.getUserNickName());
-            mOnlineIndicator.setChecked(contactUser.isUserOnlineStatus());
-        }
+        mOnlineIndicator.setImageResource(contactUser.isUserOnlineStatus() ? R.drawable.ic_online : R.drawable.ic_offline);
     }
 
     @Override
@@ -117,6 +128,12 @@ public class ChatActivity extends AppCompatActivity {
     protected void onStop() {
         super.onStop();
         if(adapter != null) adapter.stopListening();
+    }
+
+    @Override
+    protected void onDestroy() {
+        FirebaseDatabaseHelper.removeContactsInfoListner(this);
+        super.onDestroy();
     }
 
     @OnClick(R.id.fab)
@@ -137,4 +154,8 @@ public class ChatActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    public void onContactsInfoUpdate(int index) {
+        updateChatHeader();
+    }
 }

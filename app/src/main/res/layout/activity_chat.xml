@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/or"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#e7e1e1"
     android:orientation="vertical">
 
     <android.support.v7.widget.Toolbar
@@ -20,14 +20,12 @@
         app:contentInsetStart="0dp"
         app:contentInsetStartWithNavigation="0dp">
 
-        <RadioButton
-            android:id="@+id/toolbar_online_status"
+        <ImageView
+            android:id="@+id/img_status"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:buttonTint="@android:color/holo_green_light"
-            android:checked="false"
-            android:clickable="false"
-            android:textColorLink="@android:color/holo_green_light" />
+            android:layout_height="match_parent"
+            android:layout_marginRight="4dp"
+            android:src="@drawable/ic_offline" />
 
         <TextView
             android:id="@+id/toolbar_UserName"
@@ -44,50 +42,49 @@
             android:id="@+id/messages_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
             android:layout_above="@+id/textInputLayout"
-            android:layout_alignParentStart="true"
+            android:layout_weight="1"
             android:divider="@android:color/transparent"
             android:dividerHeight="16dp"
             android:stackFromBottom="true"
             android:transcriptMode="alwaysScroll" />
 
 
-        <android.support.v7.widget.LinearLayoutCompat
-            android:layout_width="match_parent"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:orientation="horizontal">
+
+        <android.support.v7.widget.CardView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="0"
-            android:orientation="horizontal">
+            android:layout_margin="8dp"
+            android:layout_weight="1">
 
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/textInputLayout"
+            <EditText
+                android:id="@+id/input"
                 android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:layout_height="wrap_content">
+                android:backgroundTint="#00FFFFFF"
+                android:hint="Type Your Message..."
+                android:inputType="textMultiLine"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp" />
 
-                <EditText
-                    android:id="@+id/input"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginRight="8dp"
-                    android:hint="Type your message" />
+        </android.support.v7.widget.CardView>
 
-            </android.support.design.widget.TextInputLayout>
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginRight="8dp"
+            android:layout_weight="0"
+            android:src="@drawable/ic_send"
+            app:fabSize="mini" />
+    </LinearLayout>
 
-            <android.support.design.widget.FloatingActionButton
-                android:id="@+id/fab"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="0"
-                android:layout_marginTop="12dp"
-                android:layout_marginRight="8dp"
-                android:src="@android:drawable/ic_menu_send"
-                android:tint="@android:color/white"
-                app:fabSize="mini" />
-
-        </android.support.v7.widget.LinearLayoutCompat>
-
-</android.support.v7.widget.LinearLayoutCompat>
+</LinearLayout>
 
